@@ -12,10 +12,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./recipe.model.js")(sequelize, Sequelize);
+db.recipes = require("./recipe.model.js")(sequelize, Sequelize);
 
 module.exports = db;
 
 db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-  });
+  console.log(result);
+})
+.catch(err=> console.log(err));

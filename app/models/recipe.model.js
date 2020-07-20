@@ -8,7 +8,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         parentRecipeId: {
             type: Sequelize.INTEGER,
-            // allowNull: false
+            allowNull: true
+        },
+        nameRecipe: {
+            type: Sequelize.STRING,
+            allowNull: false
         },
         createdDate: {
             type: Sequelize.STRING,
