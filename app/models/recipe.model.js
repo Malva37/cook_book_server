@@ -1,24 +1,28 @@
 module.exports = (sequelize, Sequelize) => {
     const Recipe = sequelize.define("recipes", {
-        recipeId: {
+        id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        parentRecipeId: {
+        parentId: {
             type: Sequelize.INTEGER,
+            references: {
+                model: 'recipes',
+                key: 'id'
+            },
             allowNull: true
         },
-        nameRecipe: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        createdDate: {
+        name: {
             type: Sequelize.STRING,
             allowNull: false
         },
         description: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        createdDate: {
             type: Sequelize.STRING,
             allowNull: false
         }
