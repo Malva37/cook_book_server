@@ -19,13 +19,6 @@ app.use(bodyParser.urlencoded({
 const db = require("./app/models");
 db.sequelize.sync();
 
-// app.get("/", (req, res) => {
-//   res.json({
-//     message: "TEST SERVER ============= TEST SERVER"
-//   });
-// });
-// const router = require("./app/routes/recipe.routes")(app)
-
 require("./app/routes/recipe.routes")(app);
 
 const PORT = process.env.PORT || 8080;

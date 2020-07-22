@@ -5,9 +5,7 @@ module.exports = app => {
 
     router.post("/", recipes.create);
   
-    router.get("/", recipes.findAll);
- 
-    // router.get("/published", recipes.findAllPublished);
+    router.get("/:parentId", recipes.findAll);
   
     router.get("/:id", recipes.findOne);
   
