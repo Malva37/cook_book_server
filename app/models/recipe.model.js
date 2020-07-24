@@ -23,8 +23,8 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         createdDate: {
-            type: Sequelize.STRING,
-            allowNull: false
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW 
         }
     }, {
         timestamps: false

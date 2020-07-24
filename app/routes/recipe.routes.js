@@ -6,10 +6,8 @@ module.exports = app => {
     router.post("/", recipes.create);
   
     router.get("/:parentId", recipes.findAll);
-  
-    router.get("/:id", recipes.findOne);
-  
-    router.put("/:id", recipes.update);
+    
+    router.put("/", recipes.update);
   
     app.use('/', router);
   };

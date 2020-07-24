@@ -3,24 +3,19 @@ const Recipe = db.recipes;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "content can't be empty"
-    });
-    return;
-  }
-
+  console.log(req.body);
   const recipe = {
-    parentRecipeId: req.body.parentId,
-    nameRecipe: req.body.name,
-    createdDate: req.body.createdDate,
+    parentId: req.body.parentId,
+    name: req.body.name,
     description: req.body.description,
   };
-
+  console.log(recipe);
 
   Recipe.create(recipe)
     .then(data => {
       res.send(data);
+      console.log(recipe);
+
     })
     .catch(err => {
       res.status(500).send({
@@ -42,7 +37,12 @@ exports.findAll = (req, res) => {
   };
 
   Recipe.findAll({
-      where: condition
+      where: condition,
+      order: [
+        ['name', 'ASC'],
+        ['description', 'ASC'],
+
+      ],
     })
     .then(data => {
       res.send(data);
@@ -55,27 +55,26 @@ exports.findAll = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  console.log("on update");
+  const id = req.body.id;
+  console.log(req.body);
 
   Recipe.update(req.body, {
       where: {
         id: id
       }
     })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Recipe was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update Recipe with id=${id}. Maybe Recipe was not found or req.body is empty!`
-        });
-      }
+    .then(() => {
+      return Recipe.findByPk(id)
+        .then(data => {
+          console.log(data.dataValues);
+          res.send(data.dataValues);
+        })
     })
     .catch(err => {
+      console.error(err);
       res.status(500).send({
-        message: "Error updating Recipe with id=" + id
+        message: `Cannot update Recipe with id=${id}`
       });
     });
 }
